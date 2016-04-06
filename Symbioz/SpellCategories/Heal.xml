@@ -1,0 +1,9 @@
+<SpellCategory>
+  <Category>Heal</Category>
+  <Effects>
+    <EffectsEnum>Eff_HealHP_108</EffectsEnum>
+    <EffectsEnum>Eff_AddHealth</EffectsEnum>
+    <EffectsEnum>Eff_HealHP_143</EffectsEnum>
+    <EffectsEnum>Eff_HealHP_81</EffectsEnum>
+  </Effects>
+</SpellCategory>

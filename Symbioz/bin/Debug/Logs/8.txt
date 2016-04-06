@@ -1,0 +1,8 @@
+Client: 127.0.0.1:49976
+At: 16/03/2016 00:34:30
+System.NullReferenceException: La référence d'objet n'est pas définie à une instance d'un objet.
+   à Symbioz.World.Models.Fights.Fighters.CharacterFighter.GetSpellLevel(UInt16 spellid)
+   à Symbioz.World.Models.Fights.Fighters.Fighter.CastSpellOnCell(UInt16 spellid, Int16 cellid)
+   à Symbioz.World.Models.Fights.Fighters.CharacterFighter.CastSpellOnCell(UInt16 spellid, Int16 cellid)
+   à Symbioz.World.Handlers.FightHandler.HandleSpellCast(GameActionFightCastRequestMessage message, WorldClient client)
+   à (Object , Message , DofusClient )

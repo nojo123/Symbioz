@@ -1,0 +1,20 @@
+C:\Users\Freak\Documents\Visual Studio 2013\Projects\SymbiozRepo\Symbioz.D2OEditor\bin\Debug\Symbioz.D2OEditor.exe.config
+C:\Users\Freak\Documents\Visual Studio 2013\Projects\SymbiozRepo\Symbioz.D2OEditor\bin\Debug\Symbioz.D2OEditor.exe
+C:\Users\Freak\Documents\Visual Studio 2013\Projects\SymbiozRepo\Symbioz.D2OEditor\bin\Debug\Symbioz.D2OEditor.pdb
+C:\Users\Freak\Documents\Visual Studio 2013\Projects\SymbiozRepo\Symbioz.D2OEditor\obj\Debug\Symbioz.D2OEditor.csprojResolveAssemblyReference.cache
+C:\Users\Freak\Documents\Visual Studio 2013\Projects\SymbiozRepo\Symbioz.D2OEditor\obj\Debug\Symbioz.D2OEditor.Properties.Resources.resources
+C:\Users\Freak\Documents\Visual Studio 2013\Projects\SymbiozRepo\Symbioz.D2OEditor\obj\Debug\Symbioz.D2OEditor.csproj.GenerateResource.Cache
+C:\Users\Freak\Documents\Visual Studio 2013\Projects\SymbiozRepo\Symbioz.D2OEditor\obj\Debug\Symbioz.D2OEditor.exe
+C:\Users\Freak\Documents\Visual Studio 2013\Projects\SymbiozRepo\Symbioz.D2OEditor\obj\Debug\Symbioz.D2OEditor.pdb
+C:\Users\Freak\Documents\Visual Studio 2013\Projects\SymbiozRepo\Symbioz.D2OEditor\obj\Debug\Symbioz.D2OEditor.EditorForm.resources
+C:\Users\Freak\Documents\Visual Studio 2013\Projects\SymbiozRepo\Symbioz.D2OEditor\bin\Debug\zlib.net.dll
+C:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz.D2OEditor\bin\Debug\Symbioz.D2OEditor.exe.config
+C:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz.D2OEditor\bin\Debug\Symbioz.D2OEditor.exe
+C:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz.D2OEditor\bin\Debug\Symbioz.D2OEditor.pdb
+C:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz.D2OEditor\bin\Debug\zlib.net.dll
+C:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz.D2OEditor\obj\Debug\Symbioz.D2OEditor.csprojResolveAssemblyReference.cache
+C:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz.D2OEditor\obj\Debug\Symbioz.D2OEditor.EditorForm.resources
+C:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz.D2OEditor\obj\Debug\Symbioz.D2OEditor.Properties.Resources.resources
+C:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz.D2OEditor\obj\Debug\Symbioz.D2OEditor.csproj.GenerateResource.Cache
+C:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz.D2OEditor\obj\Debug\Symbioz.D2OEditor.exe
+C:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz.D2OEditor\obj\Debug\Symbioz.D2OEditor.pdb

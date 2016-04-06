@@ -1,0 +1,13 @@
+Client: 127.0.0.1:51093
+At: 16/03/2016 01:42:46
+System.NullReferenceException: La référence d'objet n'est pas définie à une instance d'un objet.
+   à Symbioz.Providers.ActorIA.Actions.BuffTeamAction.Execute(MonsterFighter fighter) dans c:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz\Providers\ActorIA\Actions\BuffTeamAction.cs:ligne 18
+   à Symbioz.Providers.ActorIA.MonsterBrain.NextAction() dans c:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz\Providers\ActorIA\MonsterBrain.cs:ligne 28
+   à Symbioz.Providers.ActorIA.MonsterBrain.OnActionEnded() dans c:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz\Providers\ActorIA\MonsterBrain.cs:ligne 51
+   à Symbioz.Providers.ActorIA.MonsterBrain.NextAction() dans c:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz\Providers\ActorIA\MonsterBrain.cs:ligne 37
+   à Symbioz.Providers.ActorIA.MonsterBrain.StartPlay() dans c:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz\Providers\ActorIA\MonsterBrain.cs:ligne 56
+   à Symbioz.World.Models.Fights.Fighters.MonsterFighter.StartTurn() dans c:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz\World\Models\Fights\Fighters\MonsterFighter.cs:ligne 114
+   à Symbioz.World.Models.Fights.Fight.NewTurn() dans c:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz\World\Models\Fights\FightsTypes\Fight.cs:ligne 479
+   à Symbioz.World.Models.Fights.ClientsSynchronizer.ToggleReady(CharacterFighter fighter) dans c:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz\World\Models\Fights\ClientsSynchronizer.cs:ligne 60
+   à Symbioz.World.Handlers.FightHandler.HandleTurnReady(GameFightTurnReadyMessage message, WorldClient client) dans c:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz\World\Handlers\FightHandler.cs:ligne 25
+   à (Object , Message , DofusClient )

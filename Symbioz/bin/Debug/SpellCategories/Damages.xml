@@ -1,0 +1,23 @@
+<!-- Représente une catégorie de sorts -->
+<SpellCategory>
+  <Category>Damages</Category>
+  <Effects>
+    <EffectsEnum>Eff_DamageAir</EffectsEnum>
+    <EffectsEnum>Eff_DamageFire</EffectsEnum>
+    <EffectsEnum>Eff_DamageWater</EffectsEnum>
+    <EffectsEnum>Eff_DamageEarth</EffectsEnum>
+    <EffectsEnum>Eff_DamageAirPerAP</EffectsEnum>
+    <EffectsEnum>Eff_DamageEarthPerAP</EffectsEnum>
+    <EffectsEnum>Eff_DamageFirePerAP</EffectsEnum>
+    <EffectsEnum>Eff_DamageNeutralPerAP</EffectsEnum>
+    <EffectsEnum>Eff_DamageWaterPerAP</EffectsEnum>
+    <EffectsEnum>Eff_DamageNeutral</EffectsEnum>
+    <EffectsEnum>Eff_DamageAirPerMP</EffectsEnum>
+    <EffectsEnum>Eff_DamageEarthPerMP</EffectsEnum>
+    <EffectsEnum>Eff_DamageFirePerMP</EffectsEnum>
+    <EffectsEnum>Eff_DamageNeutralPerMP</EffectsEnum>
+    <EffectsEnum>Eff_DamageNeutralPerMP</EffectsEnum>
+    <EffectsEnum>Eff_DamageWaterPerMP</EffectsEnum>
+    <EffectsEnum>Eff_DamageFix</EffectsEnum>
+  </Effects>
+</SpellCategory>

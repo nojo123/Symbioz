@@ -1,0 +1,17 @@
+Client: 127.0.0.1:58005
+At: 14/03/2016 21:32:37
+System.NullReferenceException: La référence d'objet n'est pas définie à une instance d'un objet.
+   à Symbioz.Providers.ActorIA.Actions.CastAction.Execute(MonsterFighter fighter)
+   à Symbioz.Providers.ActorIA.MonsterBrain.NextAction()
+   à Symbioz.Providers.ActorIA.MonsterBrain.OnActionEnded()
+   à Symbioz.Providers.ActorIA.MonsterBrain.NextAction()
+   à Symbioz.Providers.ActorIA.MonsterBrain.OnActionEnded()
+   à Symbioz.Providers.ActorIA.MonsterBrain.NextAction()
+   à Symbioz.Providers.ActorIA.MonsterBrain.OnActionEnded()
+   à Symbioz.Providers.ActorIA.MonsterBrain.NextAction()
+   à Symbioz.Providers.ActorIA.MonsterBrain.StartPlay()
+   à Symbioz.World.Models.Fights.Fighters.MonsterFighter.StartTurn()
+   à Symbioz.World.Models.Fights.Fight.NewTurn()
+   à Symbioz.World.Models.Fights.ClientsSynchronizer.ToggleReady(CharacterFighter fighter)
+   à Symbioz.World.Handlers.FightHandler.HandleTurnReady(GameFightTurnReadyMessage message, WorldClient client)
+   à (Object , Message , DofusClient )

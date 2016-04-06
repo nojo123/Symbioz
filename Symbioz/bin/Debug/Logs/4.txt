@@ -1,0 +1,9 @@
+Client: 127.0.0.1:61665
+At: 15/03/2016 03:50:52
+System.NullReferenceException: La référence d'objet n'est pas définie à une instance d'un objet.
+   à Symbioz.Providers.NpcsActionsProvider.<BuySell>b__4(ItemRecord x) dans c:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz\Providers\Maps\NpcsActionsProvider.cs:ligne 87
+   à System.Collections.Generic.List`1.ConvertAll[TOutput](Converter`2 converter)
+   à Symbioz.Providers.NpcsActionsProvider.BuySell(WorldClient client, NpcSpawnRecord npc, NpcActionsRecord action) dans c:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz\Providers\Maps\NpcsActionsProvider.cs:ligne 87
+   à Symbioz.Providers.NpcsActionsProvider.Handle(WorldClient client, NpcSpawnRecord npc, SByte clientnpcactionid) dans c:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz\Providers\Maps\NpcsActionsProvider.cs:ligne 37
+   à Symbioz.World.Handlers.NpcsHandler.HandleNpcGenericAction(NpcGenericActionRequestMessage message, WorldClient client) dans c:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz\World\Handlers\NpcsHandler.cs:ligne 21
+   à (Object , Message , DofusClient )

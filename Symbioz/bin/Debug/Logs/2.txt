@@ -1,0 +1,13 @@
+Client: 127.0.0.1:52786
+At: 02/03/2016 23:54:30
+System.NullReferenceException: La référence d'objet n'est pas définie à une instance d'un objet.
+   à Symbioz.World.Models.Fights.BombsHelper.<GetPotentialWalls>d__4.MoveNext() dans c:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz\World\Models\Fights\BombsHelper.cs:ligne 43
+   à Symbioz.World.Models.Fights.Fighters.BombFighter.CheckWalls() dans c:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz\World\Models\Fights\Fighters\BombFighter.cs:ligne 89
+   à Symbioz.World.Models.Fights.Fight.SpawnBomb(Fighter master, Int16 templateid, SByte grade, Int16 cellid, FightTeam team) dans c:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz\World\Models\Fights\FightsTypes\Fight.cs:ligne 346
+   à Symbioz.Providers.SpellEffectsProvider.Effects.SummonEffects.Bomb(Fighter fighter, SpellLevelRecord level, ExtendedSpellEffect record, List`1 affecteds, Int16 castCellid) dans c:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz\Providers\SpellEffectsProvider\Effects\SummonEffects.cs:ligne 44
+   à Symbioz.Providers.SpellEffectsHandler.Handle(Fighter fighter, SpellLevelRecord record, ExtendedSpellEffect effect, List`1 affecteds, Int16 castcellid) dans c:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz\Providers\SpellEffectsProvider\SpellEffectsHandler.cs:ligne 42
+   à Symbioz.World.Models.Fights.Fighters.Fighter.HandleSpellEffects(SpellLevelRecord spell, Int16 cellid, FightSpellCastCriticalEnum critical) dans c:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz\World\Models\Fights\Fighters\Fighter.cs:ligne 317
+   à Symbioz.World.Models.Fights.Fighters.Fighter.CastSpellOnCell(UInt16 spellid, Int16 cellid) dans c:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz\World\Models\Fights\Fighters\Fighter.cs:ligne 377
+   à Symbioz.World.Models.Fights.Fighters.CharacterFighter.CastSpellOnCell(UInt16 spellid, Int16 cellid) dans c:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz\World\Models\Fights\Fighters\CharacterFighter.cs:ligne 114
+   à Symbioz.World.Handlers.FightHandler.HandleSpellCast(GameActionFightCastRequestMessage message, WorldClient client) dans c:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz\World\Handlers\FightHandler.cs:ligne 41
+   à (Object , Message , DofusClient )

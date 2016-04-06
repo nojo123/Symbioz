@@ -1,0 +1,15 @@
+Client: 127.0.0.1:51874
+At: 15/03/2016 22:34:43
+System.ArgumentNullException: La valeur ne peut pas être null.
+Nom du paramètre : source
+   à System.Linq.Enumerable.Count[TSource](IEnumerable`1 source)
+   à Symbioz.DofusProtocol.Messages.GameActionFightSpellCastMessage.Serialize(ICustomDataOutput writer) dans c:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz.Protocol\Messages\Messages\game\actions\fight\GameActionFightSpellCastMessage.cs:ligne 63
+   à Symbioz.DofusProtocol.Messages.Message.Pack(ICustomDataOutput header) dans c:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz.Protocol\Messages\Message.cs:ligne 22
+   à Symbioz.Network.Clients.DofusClient.Send(Message message)
+   à Symbioz.World.Models.Fights.Fight.<>c__DisplayClass3d.<Send>b__3a(CharacterFighter x)
+   à System.Collections.Generic.List`1.ForEach(Action`1 action)
+   à Symbioz.World.Models.Fights.Fight.Send(Message message)
+   à Symbioz.World.Models.Fights.Fighters.Fighter.CastSpellOnCell(UInt16 spellid, Int16 cellid)
+   à Symbioz.World.Models.Fights.Fighters.CharacterFighter.CastSpellOnCell(UInt16 spellid, Int16 cellid)
+   à Symbioz.World.Handlers.FightHandler.HandleSpellCast(GameActionFightCastRequestMessage message, WorldClient client)
+   à (Object , Message , DofusClient )

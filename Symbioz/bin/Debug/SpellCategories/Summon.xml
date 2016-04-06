@@ -1,0 +1,7 @@
+<SpellCategory>
+  <Category>Summon</Category>
+  <Effects>
+    <EffectsEnum>Eff_Summon</EffectsEnum>
+    <EffectsEnum>Eff_SpawnBomb</EffectsEnum>
+  </Effects>
+</SpellCategory>
