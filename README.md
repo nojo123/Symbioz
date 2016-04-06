@@ -3,7 +3,7 @@
 Dofus 2.30 Emulator written in C#
 
 
-Dofus 2.30 Client: https://1fichier.com/?gvw0da0veh"
+Dofus 2.30 Client: https://1fichier.com/?gvw0da0veh
 
 Just modify the config.xml with notepad and set the connection host value to: 127.0.0.1
 
