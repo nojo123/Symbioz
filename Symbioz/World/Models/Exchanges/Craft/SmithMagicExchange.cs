@@ -194,8 +194,11 @@ namespace Symbioz.World.Models.Exchanges.Craft
         }
         public override void Ready(bool ready, ushort step)
         {
+            if (ready)
+            {
             ReplayEngine = new SmithMagicReplayEngine(this);
             ReplayEngine.Start();
+            }
         }
         public List<ObjectEffect> GetRuneEffects()
         {
