@@ -13,7 +13,5 @@ Written by Skinz (https://github.com/Skinz3)
 
 LuaxY - https://github.com/LuaxY
 
-Xeo-Skr - https://github.com/Xeo-Skr
-
 Project under license creative commons.
 
