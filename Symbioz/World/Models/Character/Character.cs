@@ -13,6 +13,7 @@ using Symbioz.World.Models.Exchanges.Craft;
 using Symbioz.World.Models.Fights;
 using Symbioz.World.Models.Fights.Fighters;
 using Symbioz.World.Models.Maps;
+using Symbioz.World.Models.Party;
 using Symbioz.World.Records;
 using Symbioz.World.Records.Companions;
 using Symbioz.World.Records.Maps;
@@ -46,6 +47,8 @@ namespace Symbioz.World.Models
         public List<SpellItem> Spells { get { return CharacterSpellRecord.GetCharacterSpells(Id); } }
         public List<ShortcutSpell> SpellsShortcuts { get { return SpellShortcutRecord.GetCharacterShortcuts(Id); } }
         public List<Shortcut> GeneralShortcuts { get { return GeneralShortcutRecord.GetCharacterShortcuts(Id); } }
+
+        public PartyMember PartyMember;
 
         #region Exchanges
         public ExchangeTypeEnum? ExchangeType = null;

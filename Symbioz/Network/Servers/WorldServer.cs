@@ -14,6 +14,7 @@ using Symbioz.DofusProtocol.Messages;
 using Symbioz.DofusProtocol.Types;
 using Symbioz.World.Records;
 using Symbioz.World.Models;
+using Symbioz.World.Models.Party;
 
 namespace Symbioz.Network.Servers
 {
@@ -22,6 +23,7 @@ namespace Symbioz.Network.Servers
         public int InstanceMaxConnected = 0;
         public ServerStatusEnum ServerState = ServerStatusEnum.ONLINE;
         public List<WorldClient> WorldClients = new List<WorldClient>();
+        public List<Party> Parties = new List<Party>();
         public SSyncServer Server { get; set; }
         public WorldServer()
         {
@@ -91,6 +93,10 @@ namespace Symbioz.Network.Servers
         public WorldClient GetOnlineClient(string characterName)
         {
             return GetAllClientsOnline().Find(x => x.Character.Record.Name == characterName);
+        }
+        public Party GetPartyById(int partyId)
+        {
+            return this.Parties.Find(x => x.Id == partyId);
         }
       
     }
