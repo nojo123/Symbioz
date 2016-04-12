@@ -549,6 +549,11 @@ namespace Symbioz.World.Handlers
             }
         }
         #endregion
+        [InGameCommand("guild",ServerRoleEnum.PLAYER)]
+        public static void CreateGuildCommand(string value, WorldClient client)
+        {
+            client.Send(new GuildCreationStartedMessage());
+        }
     }
 }
  
