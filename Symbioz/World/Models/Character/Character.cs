@@ -13,7 +13,7 @@ using Symbioz.World.Models.Exchanges.Craft;
 using Symbioz.World.Models.Fights;
 using Symbioz.World.Models.Fights.Fighters;
 using Symbioz.World.Models.Maps;
-using Symbioz.World.Models.Party;
+using Symbioz.World.Models.Parties;
 using Symbioz.World.Records;
 using Symbioz.World.Records.Companions;
 using Symbioz.World.Records.Maps;

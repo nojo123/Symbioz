@@ -279,8 +279,9 @@
     <Compile Include="World\Models\Maps\MapScrollType.cs" />
     <Compile Include="World\Models\Monsters\DroppedItem.cs" />
     <Compile Include="World\Models\Monsters\MonsterGroup.cs" />
-    <Compile Include="World\Models\Party\Party.cs" />
-    <Compile Include="World\Models\Party\PartyMember.cs" />
+    <Compile Include="World\Models\Parties\Party.cs" />
+    <Compile Include="World\Models\Parties\PartyGuest.cs" />
+    <Compile Include="World\Models\Parties\PartyMember.cs" />
     <Compile Include="World\PathProvider\CoordCells.cs" />
     <Compile Include="World\PathProvider\Node.cs" />
     <Compile Include="World\PathProvider\Pathfinder.cs" />
