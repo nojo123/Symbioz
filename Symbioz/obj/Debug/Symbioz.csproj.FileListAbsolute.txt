@@ -127,6 +127,5 @@ C:\Users\Matspyder\Desktop\Symbioz-master\Symbioz\Symbioz\bin\Debug\Shader.Proto
 C:\Users\Matspyder\Desktop\Symbioz-master\Symbioz\Symbioz\bin\Debug\Shader.SSync.pdb
 C:\Users\Matspyder\Desktop\Symbioz-master\Symbioz\Symbioz\bin\Debug\YAXLib.pdb
 C:\Users\Matspyder\Desktop\Symbioz-master\Symbioz\Symbioz\bin\Debug\YAXLib.xml
-C:\Users\Matspyder\Desktop\Symbioz-master\Symbioz\Symbioz\obj\Debug\Symbioz.csprojResolveAssemblyReference.cache
 C:\Users\Matspyder\Desktop\Symbioz-master\Symbioz\Symbioz\obj\Debug\Symbioz.exe
 C:\Users\Matspyder\Desktop\Symbioz-master\Symbioz\Symbioz\obj\Debug\Symbioz.pdb

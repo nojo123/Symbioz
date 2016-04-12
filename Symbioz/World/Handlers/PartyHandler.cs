@@ -72,7 +72,14 @@ namespace Symbioz.World.Handlers
         public static void PartyAbdicateRequest(PartyAbdicateThroneMessage message, WorldClient client)
         {
             Party p = WorldServer.Instance.Parties.Find(x => x.Id == message.partyId);
-            p.ChangeLeader((int)message.playerId);
+            if (p.BossCharacterId == client.Character.Id)
+            {
+                p.ChangeLeader((int)message.playerId);
+            }
+            else
+            {
+                client.Character.Reply("Vous devez être chef de groupe pour nommer votre successeur");
+            }
         }
     }
 }
