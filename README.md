@@ -13,7 +13,7 @@ Written by Skinz (https://github.com/Skinz3)
 
 #Contributors
 
-Mathis Cucci
+Mathis Cucci (https://github.com/Matspyder51)
 
 #Thanks
 
