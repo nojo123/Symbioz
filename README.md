@@ -7,11 +7,16 @@ Dofus 2.30 Client: https://1fichier.com/?gvw0da0veh
 
 Just modify the config.xml with notepad and set the connection host value to: 127.0.0.1
 
+
+
 Written by Skinz (https://github.com/Skinz3)
+
+#Contributors
+
+Mathis Cucci
 
 #Thanks
 
 LuaxY - https://github.com/LuaxY
 
 Project under license creative commons.
-
