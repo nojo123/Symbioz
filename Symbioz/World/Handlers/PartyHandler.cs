@@ -82,10 +82,25 @@ namespace Symbioz.World.Handlers
             p.PlayerKick((int)message.playerId, client);
         }
         [MessageHandler]
-        public static void PartyGetInvitationDetailsRequestRequest(PartyInvitationDetailsRequestMessage message, WorldClient client)
+        public static void PartyGetInvitationDetailsRequest(PartyInvitationDetailsRequestMessage message, WorldClient client)
         {
             Party p = WorldServer.Instance.Parties.Find(x => x.Id == message.partyId);
             p.SendInvitationDetail(client);
+        }
+        [MessageHandler]
+        public static void PartyFollowMemberRequest(PartyFollowMemberRequestMessage message, WorldClient client)
+        {
+            client.Character.Reply("Cette fonctionnalité n'est pas encore implémentée");
+        }
+        [MessageHandler]
+        public static void PartyFollowThisMemberRequest(PartyFollowThisMemberRequestMessage message, WorldClient client)
+        {
+            client.Character.Reply("Cette fonctionnalité n'est pas encore implémentée");
+        }
+        [MessageHandler]
+        public static void PartyStopFollowMemberRequest(PartyStopFollowRequestMessage message, WorldClient client)
+        {
+            client.Character.Reply("Cette fonctionnalité n'est pas encore implémentée");
         }
     }
 }
