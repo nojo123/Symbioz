@@ -14,7 +14,7 @@ using Symbioz.DofusProtocol.Messages;
 using Symbioz.DofusProtocol.Types;
 using Symbioz.World.Records;
 using Symbioz.World.Models;
-using Symbioz.World.Models.Party;
+using Symbioz.World.Models.Parties;
 
 namespace Symbioz.Network.Servers
 {

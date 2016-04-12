@@ -9,9 +9,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Symbioz.World.Models.Party
+namespace Symbioz.World.Models.Parties
 {
-    public class PartyMember : IEnumerable
+    public class PartyMember
     {
         public Character C;
         public Party Party;
@@ -40,15 +40,6 @@ namespace Symbioz.World.Models.Party
             PlayerStatus status = new PlayerStatus((sbyte)0);
             PartyCompanionMemberInformations[] memberInformationsArray = new PartyCompanionMemberInformations[0];
             return new PartyMemberInformations((uint)id, (byte)level, name, entityLook, (sbyte)breed, sex, (uint)hp, (uint)maxhp, (ushort)stats.Prospecting, (byte)regen, (ushort)stats.Initiative, (sbyte)align, (short)0, (short)0, this.C.Map.Id, (ushort)this.C.SubAreaId, status, (IEnumerable<PartyCompanionMemberInformations>)memberInformationsArray);
-        }
-        public PartyGuestInformations GetPartyGuestInformations()
-        {
-            PartyCompanionMemberInformations[] memberInformationsArray = new PartyCompanionMemberInformations[0];
-            return new PartyGuestInformations(this.C.Id, this.Party.Id, this.C.Record.Name, this.C.Look.ToEntityLook(), this.C.Record.Breed, this.C.Record.Sex, new PlayerStatus((sbyte)0), (IEnumerable<PartyCompanionMemberInformations>)memberInformationsArray);
-        }
-        public IEnumerator GetEnumerator()
-        {
-            throw new NotImplementedException();
         }
     }
 }

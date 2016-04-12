@@ -4,7 +4,7 @@ using Symbioz.Enums;
 using Symbioz.Network.Clients;
 using Symbioz.Network.Messages;
 using Symbioz.Network.Servers;
-using Symbioz.World.Models.Party;
+using Symbioz.World.Models.Parties;
 using Symbioz.World.Records;
 using System;
 using System.Collections.Generic;
@@ -19,41 +19,66 @@ namespace Symbioz.World.Handlers
         [MessageHandler]
         public static void RequestParty(PartyInvitationRequestMessage message, WorldClient client)
         {
-            Party p = new Party(WorldServer.Instance.Parties.Count + 1, client.Character.Id, "");
-            WorldClient to = WorldServer.Instance.GetAllClientsOnline().Find(x => x.Character.Record.Name == message.name);
-            p.NewGuest(to);
-            p.NewMember(client);
-            client.Send(new PartyJoinMessage((uint)p.Id,(sbyte)PartyTypeEnum.PARTY_TYPE_CLASSICAL,(uint)client.Character.Id,(sbyte)p.MaxPartyMembers,
-                from entry in p.PMembers
-                select entry.GetPartyMemberInformations(),
-                from entry in p.PGuest
-                select entry.GetPartyGuestInformations(),
-                false, p.Name));
-            to.Send(new PartyInvitationMessage(1,(sbyte)PartyTypeEnum.PARTY_TYPE_CLASSICAL,client.Character.Record.Name,8,(uint)client.Character.Id,client.Character.Record.Name,(uint)to.Character.Record.Id));
+            Party p;
+            if (client.Character.PartyMember == null)
+            {
+                p = new Party(WorldServer.Instance.Parties.Count + 1, client.Character.Id, "");
+            }
+            else
+            {
+                p = WorldServer.Instance.Parties.Find(x => x.Id == client.Character.PartyMember.Party.Id);
+            }
+            WorldClient to = WorldServer.Instance.WorldClients.Find(x => x.Character.Record.Name == message.name);
+            p.CreateInvitation(client, to);
+            if (p.Members.Count == 0)
+            {
+                p.BossCharacterId = client.Character.Id;
+                p.NewMember(client);
+            }
+            
         }
         [MessageHandler]
         public static void PartyAcceptInvitation(PartyAcceptInvitationMessage message, WorldClient client)
         {
             Party p = WorldServer.Instance.GetPartyById((int)message.partyId);
-            p.NewMember(client);
-            p.RemoveGuest(client);
-            foreach (WorldClient c in p.Members)
-            {
-                c.Send(new PartyJoinMessage((uint)p.Id, (sbyte)PartyTypeEnum.PARTY_TYPE_CLASSICAL, (uint)p.BossCharacterId, (sbyte)p.MaxPartyMembers,
-                from entry in p.PMembers
-                select entry.GetPartyMemberInformations(),
-                from entry in p.PGuest
-                select entry.GetPartyGuestInformations(),
-                false, p.Name));
-            }
+            p.AcceptInvitation(client);
+        }
+        [MessageHandler]
+        public static void PartyRefusedInvitation(PartyRefuseInvitationMessage message, WorldClient client)
+        {
+            Party p = WorldServer.Instance.GetPartyById((int)message.partyId);
+            p.RefuseInvitation(client);
+        }
+        [MessageHandler]
+        public static void PartyCancelInvitation(PartyCancelInvitationMessage message, WorldClient client)
+        {
+            Party p = WorldServer.Instance.GetPartyById((int)message.partyId);
+            p.CancelInvitation(client, WorldServer.Instance.WorldClients.Find(x => x.Character.Id == message.guestId));
         }
         [MessageHandler]
         public static void PartyLeaveRequest(PartyLeaveRequestMessage message, WorldClient client)
         {
             Party p = WorldServer.Instance.Parties.Find(x => x.Id == message.partyId);
-            if(p.Members.Count+p.Guest.Count <= 2)
+            if(p.CountMembers() < 2)
             {
                 p.Delete();
+            }
+            else
+            {
+                p.QuitParty(client);
+            }
+        }
+        [MessageHandler]
+        public static void PartyAbdicateRequest(PartyAbdicateThroneMessage message, WorldClient client)
+        {
+            Party p = WorldServer.Instance.Parties.Find(x => x.Id == message.partyId);
+            if (p.BossCharacterId == client.Character.Id)
+            {
+                p.ChangeLeader((int)message.playerId);
+            }
+            else
+            {
+                client.Character.Reply("Vous devez être chef de groupe pour nommer votre successeur");
             }
         }
     }
