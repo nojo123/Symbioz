@@ -27,6 +27,7 @@ namespace Symbioz.World.Handlers
             ChatHandlers.Add(ChatActivableChannelsEnum.CHANNEL_ADMIN, ChannelsHandler.Admin);
             ChatHandlers.Add(ChatActivableChannelsEnum.CHANNEL_SALES, ChannelsHandler.Sales);
             ChatHandlers.Add(ChatActivableChannelsEnum.CHANNEL_SEEK, ChannelsHandler.Seek);
+            ChatHandlers.Add(ChatActivableChannelsEnum.CHANNEL_PARTY, ChannelsHandler.Group);
         }
         static void Handle(WorldClient client, string message, ChatActivableChannelsEnum channel)
         {
@@ -116,6 +117,17 @@ namespace Symbioz.World.Handlers
             }
             else
                 client.Character.Reply("Vous n'avez pas les droits pour utiliser ce chat");
+        }
+        public static void Group(WorldClient client, string message)
+        {
+            sbyte channel = (sbyte)ChatActivableChannelsEnum.CHANNEL_PARTY;
+            if(client.Character.PartyMember != null && client.Character.PartyMember.Party != null)
+            {
+                foreach(WorldClient c in client.Character.PartyMember.Party.Members)
+                {
+                    c.Send(new ChatServerMessage(channel, message, 1, "Symbioz", client.Character.Id, client.Character.Record.Name, client.Account.Id));
+                }
+            }
         }
     }
 }

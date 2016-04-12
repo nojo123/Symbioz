@@ -22,7 +22,8 @@ namespace Symbioz.World.Handlers
             Party p;
             if (client.Character.PartyMember == null)
             {
-                p = new Party(WorldServer.Instance.Parties.Count + 1, client.Character.Id, "");
+                WorldServer.Instance.Parties.OrderBy(x => x.Id);
+                p = new Party(WorldServer.Instance.Parties.Last().Id + 1, client.Character.Id, "");
             }
             else
             {
@@ -59,14 +60,7 @@ namespace Symbioz.World.Handlers
         public static void PartyLeaveRequest(PartyLeaveRequestMessage message, WorldClient client)
         {
             Party p = WorldServer.Instance.Parties.Find(x => x.Id == message.partyId);
-            if(p.CountMembers() < 2)
-            {
-                p.Delete();
-            }
-            else
-            {
-                p.QuitParty(client);
-            }
+            p.QuitParty(client);
         }
         [MessageHandler]
         public static void PartyAbdicateRequest(PartyAbdicateThroneMessage message, WorldClient client)
@@ -80,6 +74,18 @@ namespace Symbioz.World.Handlers
             {
                 client.Character.Reply("Vous devez être chef de groupe pour nommer votre successeur");
             }
+        }
+        [MessageHandler]
+        public static void PartyKickRequest(PartyKickRequestMessage message, WorldClient client)
+        {
+            Party p = WorldServer.Instance.Parties.Find(x => x.Id == message.partyId);
+            p.PlayerKick((int)message.playerId, client);
+        }
+        [MessageHandler]
+        public static void PartyGetInvitationDetailsRequestRequest(PartyInvitationDetailsRequestMessage message, WorldClient client)
+        {
+            Party p = WorldServer.Instance.Parties.Find(x => x.Id == message.partyId);
+            p.SendInvitationDetail(client);
         }
     }
 }
