@@ -128,6 +128,7 @@ namespace Symbioz.World.Handlers
             client.Character.RefreshPvPInfos();
             client.Character.OnConnectedNotifications();
             client.Send(new CharacterLoadingCompleteMessage());
+            client.Send(new CharacterCapabilitiesMessage(4095));
         }
         [MessageHandler]
         public static void HandleGameContextCreate(GameContextCreateRequestMessage message, WorldClient client)
