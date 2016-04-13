@@ -321,6 +321,14 @@ namespace Symbioz.World.Models
             RefreshSpells();
             RefreshShortcuts();
             Client.Send(new CharacterLevelUpMessage(Record.Level));
+            if(this.PartyMember != null)
+            {
+                foreach(WorldClient c in this.PartyMember.Party.Members)
+                {
+                    c.Send(new PartyUpdateMessage((uint)this.PartyMember.Party.Id,
+                        this.PartyMember.GetPartyMemberInformations()));
+                }
+            }
         }
         public void AddXp(ulong amount, bool sendpackets = true)
         {
@@ -615,6 +623,14 @@ namespace Symbioz.World.Models
         public void RefreshStats()
         {
             Client.Send(new CharacterStatsListMessage(StatsRecord.GetCharacterCharacteristics(StatsRecord, this)));
+            if (this.PartyMember != null)
+            {
+                foreach (WorldClient c in this.PartyMember.Party.Members)
+                {
+                    c.Send(new PartyUpdateMessage((uint)this.PartyMember.Party.Id,
+                        this.PartyMember.GetPartyMemberInformations()));
+                }
+            }
         }
         public void LeaveDialog()
         {
@@ -669,6 +685,8 @@ namespace Symbioz.World.Models
                 FighterInstance.OnDisconnect();
             if (PlayerTradeInstance != null)
                 PlayerTradeInstance.Abort();
+            if (PartyMember != null)
+                PartyMember.Party.QuitParty(Client);
             Client.Character.Look.UnsetAura();
             Record.Look = Look.ConvertToString();
             SaveTask.UpdateElement(Record);

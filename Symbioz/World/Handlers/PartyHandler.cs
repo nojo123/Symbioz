@@ -23,7 +23,16 @@ namespace Symbioz.World.Handlers
             if (client.Character.PartyMember == null)
             {
                 WorldServer.Instance.Parties.OrderBy(x => x.Id);
-                p = new Party(WorldServer.Instance.Parties.Last().Id + 1, client.Character.Id, "");
+                int partyId = 0;
+                if (WorldServer.Instance.Parties.Count > 0)
+                {
+                    partyId = WorldServer.Instance.Parties.Last().Id + 1;
+                }
+                else
+                {
+                    partyId = 1;
+                }
+                p = new Party(partyId, client.Character.Id, "");
             }
             else
             {
