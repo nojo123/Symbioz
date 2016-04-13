@@ -38,10 +38,14 @@ namespace Symbioz.World.Handlers
             {
                 p = WorldServer.Instance.Parties.Find(x => x.Id == client.Character.PartyMember.Party.Id);
             }
+            if (p == null)
+                return;
             WorldClient to = WorldServer.Instance.WorldClients.Find(x => x.Character.Record.Name == message.name);
             p.CreateInvitation(client, to);
             if (p.Members.Count == 0)
             {
+                if (to.Character.PartyMember != null && to.Character.PartyMember.Loyal)
+                    return;
                 p.BossCharacterId = client.Character.Id;
                 p.NewMember(client);
             }
@@ -51,30 +55,44 @@ namespace Symbioz.World.Handlers
         public static void PartyAcceptInvitation(PartyAcceptInvitationMessage message, WorldClient client)
         {
             Party p = WorldServer.Instance.GetPartyById((int)message.partyId);
-            p.AcceptInvitation(client);
+            if (p != null)
+            {
+                p.AcceptInvitation(client);
+            }
         }
         [MessageHandler]
         public static void PartyRefusedInvitation(PartyRefuseInvitationMessage message, WorldClient client)
         {
             Party p = WorldServer.Instance.GetPartyById((int)message.partyId);
-            p.RefuseInvitation(client);
+            if (p != null)
+            {
+                p.RefuseInvitation(client);
+            }
         }
         [MessageHandler]
         public static void PartyCancelInvitation(PartyCancelInvitationMessage message, WorldClient client)
         {
             Party p = WorldServer.Instance.GetPartyById((int)message.partyId);
-            p.CancelInvitation(client, WorldServer.Instance.WorldClients.Find(x => x.Character.Id == message.guestId));
+            if (p != null)
+            {
+                p.CancelInvitation(client, WorldServer.Instance.WorldClients.Find(x => x.Character.Id == message.guestId));
+            }
         }
         [MessageHandler]
         public static void PartyLeaveRequest(PartyLeaveRequestMessage message, WorldClient client)
         {
             Party p = WorldServer.Instance.Parties.Find(x => x.Id == message.partyId);
-            p.QuitParty(client);
+            if (p != null)
+            {
+                p.QuitParty(client);
+            }
         }
         [MessageHandler]
         public static void PartyAbdicateRequest(PartyAbdicateThroneMessage message, WorldClient client)
         {
             Party p = WorldServer.Instance.Parties.Find(x => x.Id == message.partyId);
+            if (p == null)
+                return;
             if (p.BossCharacterId == client.Character.Id)
             {
                 p.ChangeLeader((int)message.playerId);
@@ -88,13 +106,19 @@ namespace Symbioz.World.Handlers
         public static void PartyKickRequest(PartyKickRequestMessage message, WorldClient client)
         {
             Party p = WorldServer.Instance.Parties.Find(x => x.Id == message.partyId);
-            p.PlayerKick((int)message.playerId, client);
+            if (p != null)
+            {
+                p.PlayerKick((int)message.playerId, client);
+            }
         }
         [MessageHandler]
         public static void PartyGetInvitationDetailsRequest(PartyInvitationDetailsRequestMessage message, WorldClient client)
         {
             Party p = WorldServer.Instance.Parties.Find(x => x.Id == message.partyId);
-            p.SendInvitationDetail(client);
+            if (p != null)
+            {
+                p.SendInvitationDetail(client);
+            }
         }
         [MessageHandler]
         public static void PartyFollowMemberRequest(PartyFollowMemberRequestMessage message, WorldClient client)
@@ -110,6 +134,23 @@ namespace Symbioz.World.Handlers
         public static void PartyStopFollowMemberRequest(PartyStopFollowRequestMessage message, WorldClient client)
         {
             client.Character.Reply("Cette fonctionnalité n'est pas encore implémentée");
+        }
+        [MessageHandler]
+        public static void PartyNameUpdateRequest(PartyNameSetRequestMessage message, WorldClient client)
+        {
+            Party p = WorldServer.Instance.Parties.Find(x => x.Id == message.partyId);
+            if (p != null)
+            {
+                p.SetName(message.partyName, client);
+            }
+        }
+        [MessageHandler]
+        public static void PartyPledgeLoyaltyRequest(PartyPledgeLoyaltyRequestMessage message, WorldClient client)
+        {
+            if (client.Character.PartyMember != null)
+            {
+                client.Character.PartyMember.SetLoyalty(message.loyal);
+            }
         }
     }
 }

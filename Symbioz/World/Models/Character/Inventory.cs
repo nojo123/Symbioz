@@ -270,14 +270,7 @@ namespace Symbioz.World.Models
                 ItemEffectsProvider.AddEffects(Character.Client, items.BaseItem.GetEffects());
                 AddItemSkin(item, template);
             }
-            if (Character.PartyMember != null)
-            {
-                foreach (WorldClient c in Character.PartyMember.Party.Members)
-                {
-                    c.Send(new PartyUpdateMessage((uint)Character.PartyMember.Party.Id,
-                        Character.PartyMember.GetPartyMemberInformations()));
-                }
-            }
+            Character.RefreshGroupInformations();
 
         }
         public void UnequipItem(CharacterItemRecord item, byte newposition, ItemRecord template, uint quantity)
@@ -304,14 +297,7 @@ namespace Symbioz.World.Models
                     Character.NotificationError("Spamming ItemMove!");
                 }
             }
-            if (Character.PartyMember != null)
-            {
-                foreach (WorldClient c in Character.PartyMember.Party.Members)
-                {
-                    c.Send(new PartyUpdateMessage((uint)Character.PartyMember.Party.Id,
-                        Character.PartyMember.GetPartyMemberInformations()));
-                }
-            }
+            Character.RefreshGroupInformations();
         }
         public CharacterItemRecord GetEquipedWeapon()
         {

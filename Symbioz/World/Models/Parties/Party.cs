@@ -33,6 +33,18 @@ namespace Symbioz.World.Models.Parties
             WorldServer.Instance.Parties.Add(this);
         }
 
+        public void SetName(string name, WorldClient client)
+        {
+            if(client.Character.Id == this.BossCharacterId)
+            {
+                this.Name = name;
+                foreach(WorldClient c in this.Members)
+                {
+                    c.Send(new PartyNameUpdateMessage((uint)this.Id, this.Name));
+                }
+            }
+        }
+
         public int CountMembers()
         {
             return this.Members.Count + this.Guests.Count;
@@ -40,12 +52,21 @@ namespace Symbioz.World.Models.Parties
 
         public void CreateInvitation(WorldClient by, WorldClient to)
         {
+            if (to.Character.PartyMember != null && to.Character.PartyMember.Loyal)
+            {
+                by.Character.Reply("Ce joueur est déjà dans un groupe et ne veut pas recevoir d'autre invitations");
+                return;
+            }
             this.NewGuest(to);
             to.Send(new PartyInvitationMessage((uint)this.Id, (sbyte)PartyTypeEnum.PARTY_TYPE_CLASSICAL, by.Character.Record.Name, (sbyte)this.MAX_PARTY_MEMBER_COUNT, (uint)by.Character.Id, by.Character.Record.Name, (uint)to.Character.Record.Id));
         }
 
         public void AcceptInvitation(WorldClient client)
         {
+            if(client.Character.PartyMember != null)
+            {
+                client.Character.PartyMember.Party.QuitParty(client);
+            }
             this.RemoveGuest(client);
             this.NewMember(client);
         }
