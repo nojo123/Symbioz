@@ -623,14 +623,7 @@ namespace Symbioz.World.Models
         public void RefreshStats()
         {
             Client.Send(new CharacterStatsListMessage(StatsRecord.GetCharacterCharacteristics(StatsRecord, this)));
-            if (this.PartyMember != null)
-            {
-                foreach (WorldClient c in this.PartyMember.Party.Members)
-                {
-                    c.Send(new PartyUpdateMessage((uint)this.PartyMember.Party.Id,
-                        this.PartyMember.GetPartyMemberInformations()));
-                }
-            }
+            this.RefreshGroupInformations();
         }
         public void LeaveDialog()
         {
@@ -692,6 +685,18 @@ namespace Symbioz.World.Models
             SaveTask.UpdateElement(Record);
             SaveTask.UpdateElement(StatsRecord);
             Inventory.InitializeForSaveTask();
+        }
+
+        public void RefreshGroupInformations()
+        {
+            if(this.PartyMember != null)
+            {
+                foreach(WorldClient client in this.PartyMember.Party.Members)
+                {
+                    client.Send(new PartyUpdateMessage((uint)this.PartyMember.Party.Id,
+                        this.PartyMember.GetPartyMemberInformations()));
+                }
+            }
         }
     }
 }

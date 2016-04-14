@@ -1,4 +1,5 @@
 ﻿using Symbioz.DofusProtocol.Types;
+using Symbioz.DofusProtocol.Messages;
 using Symbioz.Enums;
 using Symbioz.World.PathProvider;
 using Symbioz.World.Records;
@@ -15,6 +16,7 @@ namespace Symbioz.World.Models.Parties
     {
         public Character C;
         public Party Party;
+        public bool Loyal = false;
         public PartyMember(Character c, Party p)
         {
             this.Party = p;
@@ -56,6 +58,12 @@ namespace Symbioz.World.Models.Parties
             int mapid = (int)(short)record.MapId;
             PartyCompanionMemberInformations[] memberInformationsArray = new PartyCompanionMemberInformations[0];
             return new PartyInvitationMemberInformations((uint)id, (byte)level, name, entityLook, (sbyte)breed, sex, (short)0, (short)0, this.C.Map.Id, (ushort)this.C.SubAreaId, (IEnumerable<PartyCompanionMemberInformations>)memberInformationsArray);
+        }
+
+        public void SetLoyalty(bool value)
+        {
+            this.Loyal = value;
+            this.C.Client.Send(new PartyLoyaltyStatusMessage((uint)this.Party.Id, value));
         }
     }
 }
