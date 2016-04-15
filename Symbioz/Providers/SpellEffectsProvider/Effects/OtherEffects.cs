@@ -93,5 +93,20 @@ namespace Symbioz.Providers.SpellEffectsProvider.Effects
             }
         }
 
+        [EffectHandler(EffectsEnum.Eff_ReduceEffsDuration)]
+        public static void ReduceEffsDuration(Fighter fighter, SpellLevelRecord level, ExtendedSpellEffect effect, List<Fighter> affecteds, short castcellid)
+        {
+            foreach(Fighter target in affecteds)
+            {
+                foreach(Buff buff in target.Buffs)
+                {
+                    short LastDuration = buff.Duration;
+                    buff.setDuration(effect.BaseEffect.Value, fighter);
+                    short ral = (short)((LastDuration - buff.Duration) * -1);
+                    target.Fight.Send(new GameActionFightModifyEffectsDurationMessage((ushort)buff.UID, buff.SourceId, fighter.ContextualId, ral));
+                }
+            }
+        }
+
     }
 }

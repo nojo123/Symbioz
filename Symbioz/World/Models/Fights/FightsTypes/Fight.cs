@@ -16,6 +16,8 @@ using Symbioz.Providers.SpellEffectsProvider.Buffs;
 using Symbioz.World.Records.Monsters;
 using Symbioz.Helper;
 using Symbioz.World.Models.Fights.Marks;
+using Symbioz.Network.Servers;
+using Symbioz.World.Models.Parties;
 
 namespace Symbioz.World.Models.Fights
 {
@@ -164,7 +166,7 @@ namespace Symbioz.World.Models.Fights
 
         public abstract void TryJoin(WorldClient client, int mainfighterid);
 
-        public bool CanJoin(WorldClient client, FightTeam team)
+        public bool CanJoin(WorldClient client, FightTeam team, Fighter mainFighter = null)
         {
             if (!IsPlacementCellFree(team.TeamColor))
             {
@@ -175,6 +177,23 @@ namespace Symbioz.World.Models.Fights
             {
                 client.Character.Reply("L'équipe est fermé");
                 return false;
+            }
+            if (team.TeamOptions.isRestrictedToPartyOnly)
+            {
+                if (client.Character.PartyMember == null)
+                {
+                    client.Character.Reply("Ce combat est reserver aux membres du groupe");
+                    return false;
+                }
+                if (mainFighter != null)
+                {
+                    Party p = WorldServer.Instance.WorldClients.Find(x => x.Character.Id == mainFighter.ContextualId).Character.PartyMember.Party;
+                    if (p.Id != client.Character.PartyMember.Party.Id)
+                    {
+                        client.Character.Reply("Ce combat est reserver aux membres du groupe");
+                        return false;
+                    }
+                }
             }
             return true;
         }

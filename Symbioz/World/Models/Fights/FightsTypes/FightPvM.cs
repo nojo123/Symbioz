@@ -62,7 +62,7 @@ namespace Symbioz.World.Models.Fights
                 if (mainFighter.Team.TeamColor == TeamColorEnum.RED_TEAM)
                     return;
             }
-            if (CanJoin(client, BlueTeam))
+            if (CanJoin(client, BlueTeam, mainFighter))
             {
                 var newFighter = client.Character.CreateFighter(BlueTeam);
                 BlueTeam.AddFighter(newFighter);
