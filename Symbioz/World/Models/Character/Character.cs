@@ -680,6 +680,8 @@ namespace Symbioz.World.Models
                 PlayerTradeInstance.Abort();
             if (PartyMember != null)
                 PartyMember.Party.QuitParty(Client);
+            if (DungeonPartyCharacter.GetDPCByCharacterId(this.Id) != null)
+                DungeonPartyCharacter.RemoveCharacter(this);
             Client.Character.Look.UnsetAura();
             Record.Look = Look.ConvertToString();
             SaveTask.UpdateElement(Record);
