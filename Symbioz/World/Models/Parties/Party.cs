@@ -50,7 +50,7 @@ namespace Symbioz.World.Models.Parties
             return this.Members.Count + this.Guests.Count;
         }
 
-        public void CreateInvitation(WorldClient by, WorldClient to)
+        public void CreateInvitation(WorldClient by, WorldClient to, PartyTypeEnum type = PartyTypeEnum.PARTY_TYPE_CLASSICAL, ushort dungeonId = 0)
         {
             if (to.Character.PartyMember != null && to.Character.PartyMember.Loyal)
             {
@@ -58,6 +58,11 @@ namespace Symbioz.World.Models.Parties
                 return;
             }
             this.NewGuest(to);
+            if(type == PartyTypeEnum.PARTY_TYPE_DUNGEON)
+            {
+                to.Send(new PartyInvitationDungeonMessage((uint)this.Id,(sbyte)PartyTypeEnum.PARTY_TYPE_DUNGEON,this.Name,(sbyte)this.MAX_PARTY_MEMBER_COUNT,(uint)by.Character.Id,by.Character.Record.Name,(uint)to.Character.Id,dungeonId));
+                return;
+            }
             to.Send(new PartyInvitationMessage((uint)this.Id, (sbyte)PartyTypeEnum.PARTY_TYPE_CLASSICAL, by.Character.Record.Name, (sbyte)this.MAX_PARTY_MEMBER_COUNT, (uint)by.Character.Id, by.Character.Record.Name, (uint)to.Character.Record.Id));
         }
 
@@ -69,6 +74,11 @@ namespace Symbioz.World.Models.Parties
             }
             this.RemoveGuest(client);
             this.NewMember(client);
+            if(DungeonPartyCharacter.GetDPCByCharacterId(client.Character.Id) != null)
+            {
+                List<ushort> dungeonsId = new List<ushort>();
+                client.Send(new DungeonPartyFinderRegisterSuccessMessage((IEnumerable<ushort>)dungeonsId));
+            }
         }
 
         public void RefuseInvitation(WorldClient client)

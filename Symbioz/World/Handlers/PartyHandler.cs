@@ -4,6 +4,7 @@ using Symbioz.Enums;
 using Symbioz.Network.Clients;
 using Symbioz.Network.Messages;
 using Symbioz.Network.Servers;
+using Symbioz.World.Models;
 using Symbioz.World.Models.Parties;
 using Symbioz.World.Records;
 using System;
@@ -11,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace Symbioz.World.Handlers
 {
@@ -150,6 +152,69 @@ namespace Symbioz.World.Handlers
             if (client.Character.PartyMember != null)
             {
                 client.Character.PartyMember.SetLoyalty(message.loyal);
+            }
+        }
+        [MessageHandler]
+        public static void HandleDungeonPartyFinder(DungeonPartyFinderAvailableDungeonsRequestMessage message, WorldClient client)
+        {
+            List<DungeonsIdRecord> record = DungeonsIdRecord.DungeonsId;
+            List<ushort> ids = new List<ushort>();
+            foreach(DungeonsIdRecord dj in record)
+            {
+                ids.Add((ushort)dj.Id);
+            }
+            client.Send(new DungeonPartyFinderAvailableDungeonsMessage((IEnumerable<ushort>)ids));
+        }
+        [MessageHandler]
+        public static void HandleDungeonPartyFinderRegister(DungeonPartyFinderRegisterRequestMessage message, WorldClient client)
+        {
+            if (DungeonPartyCharacter.GetDPCByCharacterId(client.Character.Id) != null)
+            {
+                DungeonPartyCharacter.UpdateCharacter(client.Character, message.dungeonIds.ToList());
+            }
+            else
+            {
+                DungeonPartyCharacter.AddCharacter(client.Character, message.dungeonIds.ToList());
+            }
+            client.Send(new DungeonPartyFinderRegisterSuccessMessage((IEnumerable<ushort>)message.dungeonIds));
+        }
+        [MessageHandler]
+        public static void HandleDungeonPartyFinderListenRequest(DungeonPartyFinderListenRequestMessage message, WorldClient client)
+        {
+            List<DungeonPartyFinderPlayer> players = DungeonPartyCharacter.GetCharactersForDungeon(message.dungeonId);
+            client.Send(new DungeonPartyFinderRoomContentMessage(message.dungeonId, (IEnumerable<DungeonPartyFinderPlayer>)players));
+        }
+        [MessageHandler]
+        public static void HandlePartyInvitationDungeonRequest(PartyInvitationDungeonRequestMessage message, WorldClient client)
+        {
+            WorldClient target = WorldServer.Instance.GetAllClientsOnline().Find(x => x.Character.Record.Name == message.name);
+            Party p;
+            if (client.Character.PartyMember == null)
+            {
+                WorldServer.Instance.Parties.OrderBy(x => x.Id);
+                int partyId = 0;
+                if (WorldServer.Instance.Parties.Count > 0)
+                {
+                    partyId = WorldServer.Instance.Parties.Last().Id + 1;
+                }
+                else
+                {
+                    partyId = 1;
+                }
+                p = new Party(partyId, client.Character.Id, "");
+            }
+            else
+            {
+                p = WorldServer.Instance.Parties.Find(x => x.Id == client.Character.PartyMember.Party.Id);
+            }
+            if (p == null)
+                return;
+            p.SetName(DungeonsIdRecord.DungeonsId.Find(x => x.Id == message.dungeonId).Name, client);
+            p.CreateInvitation(client, target, PartyTypeEnum.PARTY_TYPE_DUNGEON, message.dungeonId);
+            if (p.Members.Count == 0)
+            {
+                p.BossCharacterId = client.Character.Id;
+                p.NewMember(client);
             }
         }
     }

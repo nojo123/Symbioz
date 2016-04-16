@@ -15,6 +15,5 @@ C:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz.Helper\obj\Debug\Shader.Helper.
 C:\Users\Skinz\Desktop\Dofus\SymbiozRepo\Symbioz.Helper\obj\Debug\Shader.Helper.pdb
 C:\Users\Matspyder\Desktop\Symbioz-master\Symbioz\Symbioz.Helper\bin\Debug\Shader.Helper.dll
 C:\Users\Matspyder\Desktop\Symbioz-master\Symbioz\Symbioz.Helper\bin\Debug\Shader.Helper.pdb
-C:\Users\Matspyder\Desktop\Symbioz-master\Symbioz\Symbioz.Helper\obj\Debug\Symbioz.Helper.csprojResolveAssemblyReference.cache
 C:\Users\Matspyder\Desktop\Symbioz-master\Symbioz\Symbioz.Helper\obj\Debug\Shader.Helper.dll
 C:\Users\Matspyder\Desktop\Symbioz-master\Symbioz\Symbioz.Helper\obj\Debug\Shader.Helper.pdb

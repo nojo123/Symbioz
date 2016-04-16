@@ -61,7 +61,7 @@ namespace Symbioz.World.Records.Monsters
             var grade = GetGrade(gradeId);
             return new FighterStats(new StatsRecord(-1, (short)grade.LifePoints, 0, grade.Level, 0,  (short)grade.ActionPoints, grade.MovementPoints, grade.Power, 0,(short) grade.Wisdom, grade.Power, grade.Power, grade.Power, 0, 0,
                 (short)grade.DamageReflect, 0, 0, 0, 0 ,0,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, grade.PaDodge, grade.PmDodge,grade.NeutralResistance, grade.EarthResistance, grade.WaterResistance,
-                grade.AirResistance, grade.FireResistance,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0,0,0),summon,summonerid);
+                grade.AirResistance, grade.FireResistance,0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,0,0,0,0,0,0,0,0,0,0,0,0,0),summon,summonerid);
         }
 
         public static MonsterRecord GetMonster(ushort id)

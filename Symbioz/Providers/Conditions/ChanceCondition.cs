@@ -12,7 +12,7 @@ namespace Symbioz.Providers.Conditions
     {
         public override bool Eval(WorldClient client)
         {
-            return Condition.BasicEval(ConditionValue, ComparaisonSymbol, client.Character.StatsRecord.BaseChance);
+            return Condition.BasicEval(ConditionValue, ComparaisonSymbol, client.Character.StatsRecord.PermanentChance);
         }
     }
     [Condition("CC")]
