@@ -41,7 +41,7 @@ namespace Symbioz.World.Models.Parties
             int mapid = (int)(short)record.MapId;
             PlayerStatus status = new PlayerStatus((sbyte)0);
             PartyCompanionMemberInformations[] memberInformationsArray = new PartyCompanionMemberInformations[0];
-            return new PartyMemberInformations((uint)id, (byte)level, name, entityLook, (sbyte)breed, sex, (uint)hp, (uint)maxhp, (ushort)stats.Prospecting, (byte)regen, (ushort)stats.Initiative, (sbyte)align, (short)0, (short)0, this.C.Map.Id, (ushort)this.C.SubAreaId, status, (IEnumerable<PartyCompanionMemberInformations>)memberInformationsArray);
+            return new PartyMemberInformations((uint)id, (byte)level, name, entityLook, (sbyte)breed, sex, (uint)hp, (uint)maxhp, (ushort)stats.Prospecting, (byte)regen, (ushort)this.C.Initiative, (sbyte)align, (short)0, (short)0, this.C.Map.Id, (ushort)this.C.SubAreaId, status, (IEnumerable<PartyCompanionMemberInformations>)memberInformationsArray);
         }
         public PartyInvitationMemberInformations GetPartyInvitationMemberInformations()
         {
