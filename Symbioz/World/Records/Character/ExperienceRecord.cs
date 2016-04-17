@@ -16,12 +16,14 @@ namespace Symbioz.World.Records
         public uint Level;
         public ulong Experience;
         public int Honor;
+        public ulong Guild;
 
-        public ExperienceRecord(uint level,ulong exp,int honor)
+        public ExperienceRecord(uint level, ulong exp, int honor, ulong guild)
         {
             this.Level = level;
             this.Experience = exp;
             this.Honor = (int)honor;
+            this.Guild = guild;
         }
         public static ulong GetExperienceForLevel(uint level)
         {
@@ -31,10 +33,16 @@ namespace Symbioz.World.Records
         }
         public static ushort GetHonorForGrade(sbyte grade)
         {
-            
+
             if (grade > 10 || grade == 0)
                 return 0;
             return (ushort)Experiences.Find(x => x.Level == grade).Honor;
+        }
+        public static ulong GetExperienceForGuild(ushort level)
+        {
+            if (level > 200)
+                return 0;
+            return Experiences.Find(x => x.Level == level).Guild;
         }
     }
 }

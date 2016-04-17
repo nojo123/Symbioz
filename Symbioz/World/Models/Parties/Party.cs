@@ -3,6 +3,7 @@ using Symbioz.DofusProtocol.Types;
 using Symbioz.Enums;
 using Symbioz.Network.Clients;
 using Symbioz.Network.Servers;
+using Symbioz.World.Models.Parties.Dungeon;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -74,7 +75,7 @@ namespace Symbioz.World.Models.Parties
             }
             this.RemoveGuest(client);
             this.NewMember(client);
-            if(DungeonPartyCharacter.GetDPCByCharacterId(client.Character.Id) != null)
+            if(DungeonPartyProvider.Instance.GetDPCByCharacterId(client.Character.Id) != null)
             {
                 List<ushort> dungeonsId = new List<ushort>();
                 client.Send(new DungeonPartyFinderRegisterSuccessMessage((IEnumerable<ushort>)dungeonsId));

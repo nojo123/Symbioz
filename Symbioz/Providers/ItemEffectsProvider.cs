@@ -55,6 +55,7 @@ namespace Symbioz.Provider
             Functions.Add(EffectsEnum.Eff_SubVitality, SubVitality);
             Functions.Add(EffectsEnum.Eff_SubChance, SubChance);
             Functions.Add(EffectsEnum.Eff_SubStrength, SubStrength);
+            Functions.Add(EffectsEnum.Eff_410, APReduction);
         }
         public static void RemoveEffects(WorldClient client, List<ObjectEffect> effects)
         {
@@ -262,6 +263,10 @@ namespace Symbioz.Provider
         private static void SubStrength(WorldClient client, short value)
         {
             client.Character.StatsRecord.ContextStrength -= value;
+        }
+        private static void APReduction(WorldClient client, short value)
+        {
+            client.Character.StatsRecord.ContextAPReduction += value;
         }
     }
 }

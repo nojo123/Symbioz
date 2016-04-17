@@ -6,13 +6,13 @@ using Symbioz.Network.Messages;
 using Symbioz.Network.Servers;
 using Symbioz.World.Models;
 using Symbioz.World.Models.Parties;
+using Symbioz.World.Models.Parties.Dungeon;
 using Symbioz.World.Records;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Linq;
 
 namespace Symbioz.World.Handlers
 {
@@ -168,20 +168,20 @@ namespace Symbioz.World.Handlers
         [MessageHandler]
         public static void HandleDungeonPartyFinderRegister(DungeonPartyFinderRegisterRequestMessage message, WorldClient client)
         {
-            if (DungeonPartyCharacter.GetDPCByCharacterId(client.Character.Id) != null)
+            if (DungeonPartyProvider.Instance.GetDPCByCharacterId(client.Character.Id) != null)
             {
-                DungeonPartyCharacter.UpdateCharacter(client.Character, message.dungeonIds.ToList());
+                DungeonPartyProvider.Instance.UpdateCharacter(client.Character, message.dungeonIds.ToList());
             }
             else
             {
-                DungeonPartyCharacter.AddCharacter(client.Character, message.dungeonIds.ToList());
+                DungeonPartyProvider.Instance.AddCharacter(client.Character, message.dungeonIds.ToList());
             }
             client.Send(new DungeonPartyFinderRegisterSuccessMessage((IEnumerable<ushort>)message.dungeonIds));
         }
         [MessageHandler]
         public static void HandleDungeonPartyFinderListenRequest(DungeonPartyFinderListenRequestMessage message, WorldClient client)
         {
-            List<DungeonPartyFinderPlayer> players = DungeonPartyCharacter.GetCharactersForDungeon(message.dungeonId);
+            var players = DungeonPartyProvider.Instance.GetCharactersForDungeon(message.dungeonId);
             client.Send(new DungeonPartyFinderRoomContentMessage(message.dungeonId, (IEnumerable<DungeonPartyFinderPlayer>)players));
         }
         [MessageHandler]

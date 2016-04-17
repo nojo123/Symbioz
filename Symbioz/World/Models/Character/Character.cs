@@ -12,10 +12,13 @@ using Symbioz.World.Models.Exchanges;
 using Symbioz.World.Models.Exchanges.Craft;
 using Symbioz.World.Models.Fights;
 using Symbioz.World.Models.Fights.Fighters;
+using Symbioz.World.Models.Guilds;
 using Symbioz.World.Models.Maps;
 using Symbioz.World.Models.Parties;
+using Symbioz.World.Models.Parties.Dungeon;
 using Symbioz.World.Records;
 using Symbioz.World.Records.Companions;
+using Symbioz.World.Records.Guilds;
 using Symbioz.World.Records.Maps;
 using Symbioz.World.Records.Monsters;
 using System;
@@ -58,12 +61,14 @@ namespace Symbioz.World.Models
         public BidShopExchange BidShopInstance { get; set; }
         public PlayerTradeExchange PlayerTradeInstance { get; set; }
         public CraftExchange CraftInstance { get; set; }
+        public GuildInvitationDialog GuildInvitationDialog { get; set; }
         #endregion
 
 
         public bool IsFighting { get { return !FighterInstance.IsNull(); } }
 
         public bool SearchingArena { get { return ArenaProvider.Instance.IsSearching(Client); } }
+        public int GuildId { get { return CharacterGuildRecord.GetCharacterGuild(Id).GuildId; } }
 
         public CharacterFighter FighterInstance { get; set; }
         public bool CancelMonsterAgression = false;
@@ -680,8 +685,8 @@ namespace Symbioz.World.Models
                 PlayerTradeInstance.Abort();
             if (PartyMember != null)
                 PartyMember.Party.QuitParty(Client);
-            if (DungeonPartyCharacter.GetDPCByCharacterId(this.Id) != null)
-                DungeonPartyCharacter.RemoveCharacter(this);
+            if (DungeonPartyProvider.Instance.GetDPCByCharacterId(this.Id) != null)
+                DungeonPartyProvider.Instance.RemoveCharacter(this);
             Client.Character.Look.UnsetAura();
             Record.Look = Look.ConvertToString();
             SaveTask.UpdateElement(Record);
@@ -698,6 +703,22 @@ namespace Symbioz.World.Models
                     client.Send(new PartyUpdateMessage((uint)this.PartyMember.Party.Id,
                         this.PartyMember.GetPartyMemberInformations()));
                 }
+            }
+        }
+
+        public GuildRecord GetGuild()
+        {
+            return HasGuild ? GuildRecord.GetGuild(GuildId) : null;
+        }
+
+        public bool HasGuild { get { return GuildProvider.Instance.HasGuild(Id); } }
+
+        public void SendGuildInfos()
+        {
+            if (HasGuild)
+            {
+                Client.Send(new GuildJoinedMessage(GuildRecord.GetGuild(GuildId).GetGuildInformations(), CharacterGuildRecord.GetCharacterGuild(Id).Rights, false));
+                HumanOptions.Add(new HumanOptionGuild(GetGuild().GetGuildInformations()));
             }
         }
     }

@@ -133,6 +133,7 @@
     <Compile Include="Providers\Conditions\VitalityCondition.cs" />
     <Compile Include="Providers\Conditions\WisdomCondition.cs" />
     <Compile Include="Providers\CustomObjectUseHandler.cs" />
+    <Compile Include="World\Models\Parties\Dungeon\DungeonPartyProvider.cs" />
     <Compile Include="Providers\FightResults\Exp\ExperienceFormulas.cs" />
     <Compile Include="Providers\FightResults\Exp\GroupMemberData.cs" />
     <Compile Include="Providers\FightResults\Exp\MonsterData.cs" />
@@ -164,7 +165,7 @@
     <Compile Include="World\Handlers\GuildHandler.cs" />
     <Compile Include="World\Handlers\PartyHandler.cs" />
     <Compile Include="World\Handlers\PvPHandler.cs" />
-    <Compile Include="World\Models\DungeonPartyCharacter.cs" />
+    <Compile Include="World\Models\Parties\Dungeon\DungeonPartyCharacter.cs" />
     <Compile Include="World\Models\Exchanges\Craft\Replay\CraftReplayEngine.cs" />
     <Compile Include="World\Models\Exchanges\Craft\Replay\ReplayEngine.cs" />
     <Compile Include="World\Models\Exchanges\Craft\Replay\SmithMagicReplayEngine.cs" />
@@ -272,6 +273,8 @@
     <Compile Include="World\Models\Fights\TemporaryArenaClient.cs" />
     <Compile Include="World\Models\Fights\TimeLine.cs" />
     <Compile Include="World\Models\Fights\ClientsSynchronizer.cs" />
+    <Compile Include="World\Models\Guilds\GuildInvitationDialog.cs" />
+    <Compile Include="World\Models\Guilds\GuildProvider.cs" />
     <Compile Include="World\Models\Items\CharacterItemsExtensions.cs" />
     <Compile Include="World\Models\Items\ItemCustomEffects.cs" />
     <Compile Include="World\Models\Items\ItemDissociation.cs" />
@@ -300,7 +303,7 @@
     <Compile Include="World\Records\Companions\CompanionsCharacteristics.cs" />
     <Compile Include="World\Records\Companions\CompanionSpellRecord.cs" />
     <Compile Include="World\Records\DungeonsIdRecord.cs" />
-    <Compile Include="World\Records\Guilds\GuildMemberRecord.cs" />
+    <Compile Include="World\Records\Guilds\CharacterGuildRecord.cs" />
     <Compile Include="World\Records\Guilds\GuildRecord.cs" />
     <Compile Include="World\Records\Items\BankItemRecord.cs" />
     <Compile Include="World\Records\Items\BidShopGainRecord.cs" />

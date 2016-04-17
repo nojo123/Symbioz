@@ -50,8 +50,6 @@ namespace Symbioz.World.Records
         [Update]
         public int OrnamentId;
         [Update]
-        public int GuildId;
-        [Update]
         public sbyte AlignmentSide;
         [Update]
         public sbyte AlignmentValue;
@@ -96,7 +94,7 @@ namespace Symbioz.World.Records
 
         public CharacterRecord(int id, string name, int accountid, string look, byte level, sbyte breed,
             bool sex, int mapid, short cellid, sbyte direction, int kamas, ulong exp, int titleid,
-            int ornamentid, int guildid, sbyte alignside, sbyte alignvalue, sbyte aligngrade, uint characterpower, ushort statspoints,
+            int ornamentid, sbyte alignside, sbyte alignvalue, sbyte aligngrade, uint characterpower, ushort statspoints,
             ushort spellpoints, ushort honor, List<ushort> knowntiles, List<ushort> knownornaments, ushort activetitle,
             ushort activeornament, List<byte> knownemotes, int spawnpointmapid, short equipedskitterid, List<int> knowntips,
             ushort actualRank,ushort bestDailyRank,ushort maxRank,ushort arenaVictoryCount,ushort arenaFightsCount,bool pvpEnlable)
@@ -115,7 +113,6 @@ namespace Symbioz.World.Records
             this.Exp = exp;
             this.TitleId = titleid;
             this.OrnamentId = ornamentid;
-            this.GuildId = guildid;
             this.AlignmentSide = alignside;
             this.AlignmentValue = alignvalue;
             this.AlignmentGrade = aligngrade;
@@ -158,7 +155,7 @@ namespace Symbioz.World.Records
         {
             return new CharacterRecord(CharacterRecord.FindFreeId(), name, accountid, look, 1, breed, sex,
             ConfigurationManager.Instance.StartMapId, ConfigurationManager.Instance.StartCellId, 3, ConfigurationManager.Instance.StartKamas,
-            1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+            1, 0, 0, 0, 0, 0, 0, 0, 0, 0,
             new List<ushort>(), new List<ushort>(), 0, 0, new List<byte>() { 1 }, -1, 0, new List<int>(),ArenaProvider.DEFAULT_RANK,ArenaProvider.DEFAULT_RANK,
             ArenaProvider.DEFAULT_RANK,0,0,false);
         }

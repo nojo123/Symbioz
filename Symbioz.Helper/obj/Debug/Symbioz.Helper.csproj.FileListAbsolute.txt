@@ -17,3 +17,4 @@ C:\Users\Matspyder\Desktop\Symbioz-master\Symbioz\Symbioz.Helper\bin\Debug\Shade
 C:\Users\Matspyder\Desktop\Symbioz-master\Symbioz\Symbioz.Helper\bin\Debug\Shader.Helper.pdb
 C:\Users\Matspyder\Desktop\Symbioz-master\Symbioz\Symbioz.Helper\obj\Debug\Shader.Helper.dll
 C:\Users\Matspyder\Desktop\Symbioz-master\Symbioz\Symbioz.Helper\obj\Debug\Shader.Helper.pdb
+C:\Users\Matspyder\Desktop\Symbioz-master\Symbioz\Symbioz.Helper\obj\Debug\Symbioz.Helper.csprojResolveAssemblyReference.cache

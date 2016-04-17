@@ -28,22 +28,29 @@ namespace Symbioz.World.Records.Guilds
 
         public int BackgroundColor;
 
-        public GuildRecord(int id, string name, GuildEmblem emblem)
+        public ushort Level;
+
+        public ulong Experience;
+
+        public GuildRecord(int id, string name, ushort symbolShape, int symbolColor,
+            sbyte backgroundShape, int backgroundColor, ushort level, ulong experience)
         {
             this.Id = id;
             this.Name = name;
-            this.SymbolShape = emblem.symbolShape;
-            this.SymbolColor = emblem.symbolColor;
-            this.BackgroundShape = emblem.backgroundShape;
-            this.BackgroundColor = emblem.backgroundColor;
+            this.SymbolShape = symbolShape;
+            this.BackgroundShape = backgroundShape;
+            this.BackgroundColor = backgroundColor;
+            this.Level = level;
+            this.Experience = experience;
         }
-
-        public static GuildEmblem GetGuildEmblem(int guildId)
+        public GuildInformations GetGuildInformations()
         {
-            GuildRecord guild = Guilds.Find(x => x.Id == guildId);
-            return new GuildEmblem(guild.SymbolShape, guild.SymbolColor, guild.BackgroundShape, guild.BackgroundColor);
+            return new GuildInformations((uint)Id, Name, new GuildEmblem(SymbolShape, 0, BackgroundShape, BackgroundColor));
         }
-
+        public BasicGuildInformations GetBasicInformations()
+        {
+            return new BasicGuildInformations((uint)Id, Name);
+        }
         public static GuildRecord GetGuild(int id)
         {
             return Guilds.Find(x => x.Id == id);
