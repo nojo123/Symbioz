@@ -8,6 +8,12 @@ Dofus 2.30 Client: https://1fichier.com/?gvw0da0veh
 Just modify the config.xml with notepad and set the connection host value to: 127.0.0.1
 
 
+#Some Pictures
+
+![alt tag](http://image.noelshack.com/fichiers/2016/15/1460897223-dungeonpartyfinder.png)
+![alt tag](http://image.noelshack.com/fichiers/2016/15/1460897227-eliotropes.png)
+
+#Author
 
 Written by Skinz (https://github.com/Skinz3)
 
