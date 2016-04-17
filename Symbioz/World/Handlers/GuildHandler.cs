@@ -8,6 +8,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Symbioz.DofusProtocol.Types;
+using Symbioz.World.Models.Guilds;
+using Symbioz.World.Records;
+using Symbioz.Network.Servers;
 
 namespace Symbioz.World.Handlers
 {
@@ -16,16 +20,14 @@ namespace Symbioz.World.Handlers
         [MessageHandler]
         public static void HandleGuildCreationRequest(GuildCreationValidMessage message, WorldClient client)
         {
-            if (client.Character.Record.GuildId != 0)
+            if (GuildProvider.Instance.HasGuild(client.Character.Id))
             {
                 client.Send(new GuildCreationResultMessage((sbyte)GuildCreationResultEnum.GUILD_CREATE_ERROR_ALREADY_IN_GUILD));
                 return;
             }
             if (GuildRecord.CanCreateGuild(message.guildName))
             {
-                GuildRecord newGuild = new GuildRecord(GuildRecord.PopNextId(), message.guildName, message.guildEmblem);
-                newGuild.AddElement(); // met l'element en cache pour la sauvegarde en bdd (l'ajoute a la liste dans GuildRecord)
-                client.Character.Record.GuildId = newGuild.Id;
+                GuildRecord newGuild = GuildProvider.Instance.CreateGuild(client.Character, message);
                 client.Send(new GuildCreationResultMessage((sbyte)GuildCreationResultEnum.GUILD_CREATE_OK));
             }
             else
@@ -33,7 +35,68 @@ namespace Symbioz.World.Handlers
                 client.Send(new GuildCreationResultMessage((sbyte)GuildCreationResultEnum.GUILD_CREATE_ERROR_NAME_ALREADY_EXISTS));
             }
         }
-        /*[MessageHandler]
-        public static void HandleGuildGetInformations(Guild)*/
+        [MessageHandler]
+        public static void HandleGuildInvitationMessage(GuildInvitationMessage message, WorldClient client)
+        {
+            WorldClient target = WorldServer.Instance.GetOnlineClient((int)message.targetId);
+
+            GuildInvitationDialog dialog = new GuildInvitationDialog(client, target);
+
+            dialog.Request();
+        }
+        [MessageHandler]
+        public static void HandleGuildKickRequestMessage(GuildKickRequestMessage message, WorldClient client)
+        {
+            GuildProvider.Instance.LeaveGuild(WorldServer.Instance.GetOnlineClient((int)message.kickedId).Character);
+        }
+        [MessageHandler]
+        public static void HandleGuildInvitationAnswerMessage(GuildInvitationAnswerMessage message, WorldClient client)
+        {
+            client.Character.GuildInvitationDialog.Answer(message.accept);
+        }
+        [MessageHandler]
+        public static void HandleGuildChangeMemberParameters(GuildChangeMemberParametersMessage message, WorldClient client)
+        {
+            Logger.Log(message.rank);
+        }
+        [MessageHandler]
+        public static void HandleGuildGetInformations(GuildGetInformationsMessage message, WorldClient client)
+        {
+            switch ((GuildInformationsTypeEnum)message.infoType)
+            {
+                case GuildInformationsTypeEnum.INFO_GENERAL:
+
+                    GuildRecord guild = GuildRecord.GetGuild(client.Character.GuildId);
+
+                    ulong expFloor = ExperienceRecord.GetExperienceForGuild((ushort)(guild.Level));
+
+                    ulong expNextFloor = ExperienceRecord.GetExperienceForGuild((ushort)(guild.Level + 1));
+
+                    client.Send(new GuildInformationsGeneralMessage(true, false,
+                        (byte)guild.Level, expFloor, guild.Experience, expNextFloor, 0,
+                        (ushort)CharacterGuildRecord.MembersCount(guild.Id),
+                        (ushort)GuildProvider.Instance.ConnectedMembersCount(guild.Id)));
+
+                    break;
+
+                case GuildInformationsTypeEnum.INFO_MEMBERS:
+
+                    client.Send(new GuildInformationsMembersMessage(
+                        CharacterGuildRecord.GetMembers(client.Character.GuildId)));
+                    break;
+                case GuildInformationsTypeEnum.INFO_BOOSTS:
+                    break;
+                case GuildInformationsTypeEnum.INFO_PADDOCKS:
+                    break;
+                case GuildInformationsTypeEnum.INFO_HOUSES:
+                    break;
+                case GuildInformationsTypeEnum.INFO_TAX_COLLECTOR_GUILD_ONLY:
+                    break;
+                case GuildInformationsTypeEnum.INFO_TAX_COLLECTOR_ALLIANCE:
+                    break;
+                case GuildInformationsTypeEnum.INFO_TAX_COLLECTOR_LEAVE:
+                    break;
+            }
+        }
     }
 }
