@@ -11,7 +11,9 @@ using Symbioz.Network.Messages;
 using Symbioz.ORM;
 using Symbioz.Utils;
 using Symbioz.World.Models;
+using Symbioz.World.Models.Guilds;
 using Symbioz.World.Records;
+using Symbioz.World.Records.Guilds;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -129,6 +131,11 @@ namespace Symbioz.World.Handlers
             client.Character.OnConnectedNotifications();
             client.Send(new CharacterCapabilitiesMessage(4095));
             client.Send(new CharacterLoadingCompleteMessage());
+            if (GuildProvider.Instance.HasGuild(client.Character.Id)) {
+                client.Send(new GuildMembershipMessage(client.Character.GetGuild().GetGuildInformations(),CharacterGuildRecord.GetCharacterGuild(client.Character.Id).Rights,true));
+                client.Character.HumanOptions.Add(new HumanOptionGuild(client.Character.GetGuild().GetGuildInformations()));
+                client.Character.RefreshOnMapInstance();
+            }
 
         }
         [MessageHandler]

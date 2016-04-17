@@ -6,7 +6,9 @@ using Symbioz.Network.Clients;
 using Symbioz.Network.Messages;
 using Symbioz.Network.Servers;
 using Symbioz.World.Handlers;
+using Symbioz.World.Models.Guilds;
 using Symbioz.World.Records;
+using Symbioz.World.Records.Guilds;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -28,6 +30,7 @@ namespace Symbioz.World.Handlers
             ChatHandlers.Add(ChatActivableChannelsEnum.CHANNEL_SALES, ChannelsHandler.Sales);
             ChatHandlers.Add(ChatActivableChannelsEnum.CHANNEL_SEEK, ChannelsHandler.Seek);
             ChatHandlers.Add(ChatActivableChannelsEnum.CHANNEL_PARTY, ChannelsHandler.Group);
+            ChatHandlers.Add(ChatActivableChannelsEnum.CHANNEL_GUILD, ChannelsHandler.Guild);
         }
         static void Handle(WorldClient client, string message, ChatActivableChannelsEnum channel)
         {
@@ -63,6 +66,11 @@ namespace Symbioz.World.Handlers
             var target = WorldServer.Instance.GetOnlineClient(message.receiver);
             if (target != null)
             {
+                if(target.Character.PlayerStatus.statusId == (sbyte)PlayerStatusEnum.PLAYER_STATUS_PRIVATE || target.Character.PlayerStatus.statusId == (sbyte)PlayerStatusEnum.PLAYER_STATUS_SOLO)
+                {
+                    client.Character.ReplyError("Ce joueur ne veut pas être contacter");
+                    return;
+                }
                 target.Send(new ChatServerMessage((sbyte)ChatActivableChannelsEnum.PSEUDO_CHANNEL_PRIVATE, message.content, 1, client.Character.Record.Name, client.Character.Id, client.Character.Record.Name, client.Account.Id));
                 client.Send(new ChatServerCopyMessage((sbyte)ChatActivableChannelsEnum.PSEUDO_CHANNEL_PRIVATE, message.content, 1, client.Character.Record.Name, (uint)target.Character.Record.Id, target.Character.Record.Name));
             }
@@ -124,6 +132,18 @@ namespace Symbioz.World.Handlers
             if(client.Character.PartyMember != null && client.Character.PartyMember.Party != null)
             {
                 foreach(WorldClient c in client.Character.PartyMember.Party.Members)
+                {
+                    c.Send(new ChatServerMessage(channel, message, 1, "Symbioz", client.Character.Id, client.Character.Record.Name, client.Account.Id));
+                }
+            }
+        }
+        public static void Guild(WorldClient client, string message)
+        {
+            sbyte channel = (sbyte)ChatActivableChannelsEnum.CHANNEL_GUILD;
+            if (client.Character.GetGuild() != null)
+            {
+                GuildRecord guild = client.Character.GetGuild();
+                foreach (WorldClient c in WorldServer.Instance.GetAllClientsOnline().FindAll(x=>x.Character.GetGuild() == guild))
                 {
                     c.Send(new ChatServerMessage(channel, message, 1, "Symbioz", client.Character.Id, client.Character.Record.Name, client.Account.Id));
                 }

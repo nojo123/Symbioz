@@ -84,6 +84,8 @@ namespace Symbioz.World.Models
             }
         }
 
+        public PlayerStatus PlayerStatus;
+
         public Character(CharacterRecord record, WorldClient client)
         {
             this.Client = client;
@@ -92,6 +94,8 @@ namespace Symbioz.World.Models
             this.HumanOptions = new List<HumanOption>();
 
             this.Inventory = new Inventory(this);
+
+            this.PlayerStatus = new PlayerStatus((sbyte)PlayerStatusEnum.PLAYER_STATUS_AVAILABLE);
         }
         public CharacterFighter CreateFighter(FightTeam team)
         {
@@ -333,6 +337,18 @@ namespace Symbioz.World.Models
                     c.Send(new PartyUpdateMessage((uint)this.PartyMember.Party.Id,
                         this.PartyMember.GetPartyMemberInformations()));
                 }
+            }
+            if(level >= 100 && !this.Record.KnownOrnaments.Contains(13))
+            {
+                this.AddOrnament(13);
+            }
+            else if(level>=160 && !this.Record.KnownOrnaments.Contains(14))
+            {
+                this.AddOrnament(14);
+            }
+            else if(level >= 200 && !this.Record.KnownOrnaments.Contains(15))
+            {
+                this.AddOrnament(15);
             }
         }
         public void AddXp(ulong amount, bool sendpackets = true)
