@@ -198,6 +198,12 @@ namespace Symbioz.World.Handlers
             }
             client.Character.RefreshShortcuts();
         }
+        [MessageHandler]
+        public static void HandePlayerStatusChangeRequest(PlayerStatusUpdateRequestMessage message, WorldClient client)
+        {
+            client.Character.PlayerStatus = message.status;
+            client.Send(new PlayerStatusUpdateMessage(client.Character.Record.AccountId, (uint)client.Character.Id, message.status));
+        }
 
     }
 }

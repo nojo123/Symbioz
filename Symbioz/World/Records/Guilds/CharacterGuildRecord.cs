@@ -46,7 +46,7 @@ namespace Symbioz.World.Records.Guilds
             sbyte connected = (sbyte)(WorldServer.Instance.IsConnected(CharacterId) ? 1 : 0);
             CharacterRecord cRecord = CharacterRecord.GetCharacterRecordById(CharacterId);
             return new GuildMember((uint)CharacterId, cRecord.Level, cRecord.Name, cRecord.Breed, cRecord.Sex, Rank, GivenExperience, ExperienceGivenPercent,
-                Rights, connected, cRecord.AlignmentSide, 0, 0, cRecord.AccountId, 0, new PlayerStatus(0));
+                Rights, connected, cRecord.AlignmentSide, 0, 0, cRecord.AccountId, 0, WorldServer.Instance.GetOnlineClient(CharacterId).Character.PlayerStatus);
         }
         public static bool HasGuild(int characterId)
         {
